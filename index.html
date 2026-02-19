@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobaLogistics</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* --- Базовые настройки --- */
+        :root {
+            --primary-color: #0f2c59; /* Темно-синий */
+            --accent-color: #dac0a3;  /* Бежево-золотой */
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f9f9f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Навигация --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #d35400; /* Акцент для логотипа */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d35400;
+        }
+
+        .login-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #1a428a;
+            color: var(--white);
+        }
+
+        /* --- Главный экран (Hero Section) --- */
+        .hero {
+            /* Статичная картинка (плейсхолдер) */
+            background-image: linear-gradient(rgba(15, 44, 89, 0.7), rgba(15, 44, 89, 0.7)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 0; /* Компенсация фиксированного меню не нужна, т.к. height 100vh */
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #d35400;
+            color: var(--white);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            background-color: #e67e22;
+        }
+
+        /* --- О компании --- */
+        .about {
+            padding: 80px 0;
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #d35400;
+            margin: 10px auto 0;
+        }
+
+        .about p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* --- Услуги --- */
+        .services {
+            padding: 80px 0;
+            background-color: #f4f6f8;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #d35400;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* --- Подвал (Footer) --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            margin: 0 15px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* --- Адаптивность --- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 20px 0;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 20px;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">Global<span>Logistics</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="about.html">О компании</a></li>
+                    <li><a href="service.html">Услуги</a></li>
+                    <li><a href="#calculator">Калькулятор</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                    <li><a href="login.html">Войти</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="login-btn">Личный кабинет</a>
+        </div>
+    </header>
+
+    <!-- Главный экран (Hero) -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Логистика без границ</h1>
+            <p>Доставим ваш груз в любую точку мира точно в срок</p>
+            <a href="#calculator" class="cta-button">Рассчитать стоимость</a>
+        </div>
+    </section>
+
+    <!-- О компании -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">О компании</h2>
+            <p>
+                Мы — международный логистический оператор с 15-летним опытом работы на рынке. 
+                Наша миссия — делать сложные цепочки поставок простыми и прозрачными для бизнеса. 
+                Мы объединяем передовые технологии, собственную инфраструктуру и команду профессионалов, 
+                чтобы обеспечить надежность и эффективность ваших грузоперевозок.
+            </p>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section id="services" class="services">
+        <div class="container">
+            <div style="text-align: center;">
+                <h2 class="section-title">Наши услуги</h2>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Карточка 1 -->
+                <div class="service-card">
+                    <div class="service-icon">🚛</div>
+                    <h3>Автоперевозки</h3>
+                    <p>Надежная доставка грузов автомобильным транспортом по всей стране и СНГ. Сборные и генеральные грузы.</p>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="service-card">
+                    <div class="service-icon">✈️</div>
+                    <h3>Авиаперевозки</h3>
+                    <p>Срочная доставка грузов авиатранспортом. Оптимальные маршруты для ценных и скоропортящихся товаров.</p>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div class="service-card">
+                    <div class="service-icon">⚓</div>
+                    <h3>Морские перевозки</h3>
+                    <p>Экономичная доставка контейнеров морским путем. Прямые линии и транзитные перевозки.</p>
+                </div>
+
+                <!-- Карточка 4 -->
+                <div class="service-card">
+                    <div class="service-icon">🏛️</div>
+                    <h3>Таможенное оформление</h3>
+                    <p>Полный комплекс услуг по таможенной очистке грузов. Подготовка документации и декларирование.</p>
+                </div>
+
+                <!-- Карточка 5 -->
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <h3>Складское хранение</h3>
+                    <p>Современные склады класса А. Ответственное хранение, кросс-докинг и упаковка.</p>
+                </div>
+
+                <!-- Карточка 6 -->
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Экспедирование</h3>
+                    <p>Комплексное управление цепями поставок. Разработка логистических схем и контроль на всех этапах.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">О компании</a>
+                <a href="#">Услуги</a>
+                <a href="#">Калькулятор</a>
+                <a href="#">Контакты</a>
+            </div>
+            <p>&copy; 2023 GlobalLogistics. Все права защищены.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.7;">Москва, ул. Логистическая, д. 10 | +7 (999) 000-00-00</p>
+        </div>
+    </footer>
+
+</body>
+</html>
