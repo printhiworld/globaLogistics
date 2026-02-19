@@ -1,6 +1,7 @@
 User-agent: *
 Disallow: /login/   
-
+Disallow: /profile/   
 Allow: /
+
 
 Sitemap: https://github.com/printhiworld/globaLogistics/sitemap.xml
